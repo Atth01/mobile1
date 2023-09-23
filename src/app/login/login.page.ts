@@ -5,7 +5,7 @@ import {
   ToastController,
   LoadingController,
 } from '@ionic/angular';
-import { error } from 'console';
+
 //import axios from 'axios;
 
 @Component({
@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {}
-  async presentToast(a) {
+  async presentToast(a: any) {
     const toast = await this.toasCtrl.create({
       message: a,
       duration: 1500,
@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
       };
       try {
         const storage = await this.storage.create();
-        fetch('', {
+        fetch('http://localhost/api/login.php', {
           method: 'POST',
           headers: header,
           body: JSON.stringify(data),

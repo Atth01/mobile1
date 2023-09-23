@@ -1,13 +1,46 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">NPM</ion-label>
+    <ion-input [(ngModel)]="npm" placholder="insert NPM" />
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">NAME</ion-label>
+    <ion-input [(ngModel)]="name" placholder="insert Name" />
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">program studi</ion-label>
+    <ion-input [(ngModel)]="prodi" type="prodi" placholder="insert Program studi" />
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input [(ngModel)]="email" placholder="insert Email" />
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Telpon</ion-label>
+    <ion-input [(ngModel)]="telp" placholder="insert telpon" />
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Username</ion-label>
+    <ion-input [(ngModel)]="username" placholder="insert telpon" />
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input [(ngModel)]="password" placholder="insert password" />
+  </ion-item>
+  <div class="container-form-btn">
+    <button class="container-custom-btn" (click)="click()">Register</button>
+  </div>
+  <div class="title">
+    <h5>Already have an account ? Back to</h5>
+    <b class="btn" (click)="login()"><u> Login </u></b>
+  </div>
+
 </ion-content>
