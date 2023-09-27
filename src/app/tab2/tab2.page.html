@@ -1,17 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Tambahkan tombol kembali ke login dengan menggunakan (click) untuk mengaktifkan navigasi -->
+      <ion-button (click)="goToLoginPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
       Tab 2
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
-</ion-content>
+<!-- Sisanya dari tampilan Tab 2 Anda -->

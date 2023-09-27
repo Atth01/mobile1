@@ -2,45 +2,61 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
+      <ion-title>Register</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item>
-    <ion-label position="floating">NPM</ion-label>
-    <ion-input [(ngModel)]="npm" placholder="insert NPM" />
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">NAME</ion-label>
-    <ion-input [(ngModel)]="name" placholder="insert Name" />
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">program studi</ion-label>
-    <ion-input [(ngModel)]="prodi" type="prodi" placholder="insert Program studi" />
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Email</ion-label>
-    <ion-input [(ngModel)]="email" placholder="insert Email" />
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Telpon</ion-label>
-    <ion-input [(ngModel)]="telp" placholder="insert telpon" />
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Username</ion-label>
-    <ion-input [(ngModel)]="username" placholder="insert telpon" />
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Password</ion-label>
-    <ion-input [(ngModel)]="password" placholder="insert password" />
-  </ion-item>
-  <div class="container-form-btn">
-    <button class="container-custom-btn" (click)="click()">Register</button>
+<ion-content [fullscreen]="true">
+  <div class="container d-block justify-content-center">
+    <ion-item>
+      <ion-label position="floating">NPM</ion-label>
+      <ion-input [(ngModel)]="npm" placeholder="Insert NPM"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nama</ion-label>
+      <ion-input
+        [(ngModel)]="nama"
+        placeholder="Insert Nama"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Program Studi</ion-label>
+      <ion-input
+        [(ngModel)]="prodi"
+        placeholder="Insert Prodi"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input
+        [(ngModel)]="email"
+        placeholder="Insert Email"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telepon</ion-label>
+      <ion-input
+        [(ngModel)]="telp"
+        placeholder="Insert Telepon"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input
+        [(ngModel)]="username"
+        placeholder="Insert Username"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input
+        [(ngModel)]="password"
+        placeholder="Insert Password"
+      ></ion-input>
+    </ion-item>
+    <div class="form-group mt-3">
+      <button (click)="register()" class="form-control btn btn-primary">Register</button>
+    </div>
   </div>
-  <div class="title">
-    <h5>Already have an account ? Back to</h5>
-    <b class="btn" (click)="login()"><u> Login </u></b>
-  </div>
-
 </ion-content>

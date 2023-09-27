@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
+
+  // Fungsi untuk pergi ke halaman login
+  goToLoginPage() {
+    this.navCtrl.navigateForward('/login');
+  }
 
 }

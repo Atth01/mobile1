@@ -1,11 +1,11 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
+  AlertController,
+  LoadingController,
   NavController,
   ToastController,
-  LoadingController,
 } from '@ionic/angular';
-import { Method } from 'ionicons/dist/types/stencil-public-runtime';
+import { Http } from '@capacitor-community/http';
 
 @Component({
   selector: 'app-register',
@@ -13,21 +13,22 @@ import { Method } from 'ionicons/dist/types/stencil-public-runtime';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  public username: string = '';
+  public password: string = '';
+  public nama: string = '';
   public npm: string = '';
-  public name: string = '';
   public prodi: string = '';
   public email: string = '';
   public telp: string = '';
-  public username: string = '';
-  public password: string = '';
+
   constructor(
     private navCtrl: NavController,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
+    private loadCtrl: LoadingController,
+    private alertCtrl: AlertController
   ) {}
 
-  ngOnInit() {}
-  async presentToast(a:any) {
+  async presentToast(a: any) {
     const toast = await this.toastCtrl.create({
       message: a,
       duration: 1500,
@@ -36,69 +37,50 @@ export class RegisterPage implements OnInit {
     });
     toast.present();
   }
-  async click() {
-    if (
-      this.npm === '' ||
-      this.name === '' ||
-      this.prodi === '' ||
-      this.email === '' ||
-      this.telp === '' ||
-      this.username === '' ||
-      this.password === ''
-    ) {
-      this.presentToast('Username Cannot be empyty!');
-    } else if (this.password.length < 8) {
-      this.presentToast('Password must contains at least 8 characters!');
-    } else if (
-      !/['!@#$%^&*()_+\-=/[\]{};':"\\|,.<>\/?~]/.test(this.password) ||
-      /[ ]/.test(this.password)
-    ) {
-      this.presentToast('Use at least 1 special character and no space!');
+
+  async register() {
+    if (this.npm === "" || this.prodi === "" || this.nama === "" || this.telp === "" || this.email === "" || this.username === "" || this.password === ""){
+      this.presentToast('Fill all the register form');
+    } else if (this.password.length < 8){
+      this.presentToast('Password must contains at least 8 characters');
     } else {
-      const loader = await this.loadingCtrl.create({
-        message: 'Please wait...',
-      });
+      const loader = await this.loadCtrl.create({
+        message: "Please wait...",
+      })
       loader.present();
 
-      const header = {
-        //eslint-disable-next-line @typescript-eslint/naming-convention
-        Accept: 'Application/json',
-        //eslint-disable-next-line @typescript-eslint/naming-convention
-        'Content-Type': 'Application/json',
-      };
-      const data = {
-        npm: this.npm,
-        name: this.name,
-        prodi: this.prodi,
-        email: this.email,
-        telp: this.telp,
-        username: this.username,
-        pass: this.password,
-      };
       try {
-        fetch('http://localhost/api/register.php', {
-          method: 'POST',
-          headers: header,
-          body: JSON.stringify(data),
+        let url = 'http://localhost/api/register.php';
+        Http.request({
+          method: "POST",
+          url: url,
+          headers: { 'Content-Type': 'application/json' },
+          data: {
+            npm: this.npm,
+            prodi: this.prodi,
+            nama: this.nama,
+            email: this.email,
+            telp: this.telp,
+            username: this.username,
+            pass: this.password,
+          },
         })
-          .then((res) => res.json())
           .then((res) => {
-            if (res === 'success') {
+            if (res != null) {
               loader.dismiss();
-              this.navCtrl.navigateRoot('/login');
+              this.presentToast('Data berhasil disimpan');
+              this.navCtrl.navigateRoot(['/login']);
             } else {
               loader.dismiss();
               this.presentToast(res);
             }
-          })
-          .catch((error) => console.log(error));
+          });
       } catch (err) {
         loader.dismiss();
         this.presentToast('Something went wrong!');
       }
     }
   }
-  login() {
-    this.navCtrl.navigateBack('/login');
-  }
+
+  ngOnInit() {}
 }

@@ -34,31 +34,26 @@ export class LoginPage implements OnInit {
     toast.present();
   }
   async login() {
-    if (this.username === '') {
-      this.presentToast('Username cannot be empty!');
-    } else if (this.password === '') {
-      this.presentToast('Password cannot be empty');
+    if (this.username === '' || this.password === '') {
+      this.presentToast('Username and Password cannot be empty !');
     } else {
       const loader = await this.loadingCtrl.create({
         message: 'Please wait...',
       });
       loader.present();
-      let data = {
-        username: this.username,
-        pass: this.password,
-      };
-      const header = {
-        //eslint-disable-next-line @typescript-eslint/naming-convention
-        Accept: 'application/json',
-        //eslint-disable-next-line @typescript-eslint/naming-convention
-        'Content-Type': 'application/json',
-      };
       try {
         const storage = await this.storage.create();
-        fetch('http://localhost/api/login.php', {
+        let url = 'http://localhost/api/login.php';
+        fetch(url,{
           method: 'POST',
-          headers: header,
-          body: JSON.stringify(data),
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json'
+           },
+          body: JSON.stringify({
+            username: this.username,
+            pass: this.password,
+          }),
         })
           .then((res) => res.json())
           .then((res) => {
@@ -71,9 +66,6 @@ export class LoginPage implements OnInit {
               loader.dismiss();
               this.presentToast(res.message);
             }
-          })
-          .catch((error) => {
-            this.presentToast(error);
           });
       } catch (err) {
         loader.dismiss();
